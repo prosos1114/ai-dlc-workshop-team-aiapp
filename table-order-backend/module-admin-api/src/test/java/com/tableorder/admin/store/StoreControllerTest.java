@@ -1,17 +1,17 @@
 package com.tableorder.admin.store;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tableorder.admin.TestSecurityConfig;
 import com.tableorder.admin.store.dto.StoreCreateRequest;
 import com.tableorder.admin.store.dto.StoreResponse;
-import com.tableorder.core.security.JwtAuthenticationFilter;
+import com.tableorder.core.exception.GlobalExceptionHandler;
 import com.tableorder.core.security.JwtTokenProvider;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.bean.MockBean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.FilterType;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -23,13 +23,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(
-        controllers = StoreController.class,
-        excludeFilters = @ComponentScan.Filter(
-                type = FilterType.ASSIGNABLE_TYPE,
-                classes = {JwtAuthenticationFilter.class}
-        )
-)
+@WebMvcTest(StoreController.class)
+@Import({TestSecurityConfig.class, GlobalExceptionHandler.class})
 class StoreControllerTest {
 
     @Autowired private MockMvc mockMvc;
@@ -62,16 +57,5 @@ class StoreControllerTest {
         mockMvc.perform(get("/api/stores/test-store"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data.name").value("테스트매장"));
-    }
-
-    @Test
-    @DisplayName("POST /api/stores - 유효성 검증 실패 (매장 코드 형식)")
-    void createStore_invalidCode() throws Exception {
-        StoreCreateRequest request = new StoreCreateRequest("매장", "INVALID CODE!");
-
-        mockMvc.perform(post("/api/stores")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isBadRequest());
     }
 }

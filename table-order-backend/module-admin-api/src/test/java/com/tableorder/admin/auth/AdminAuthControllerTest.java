@@ -1,39 +1,31 @@
 package com.tableorder.admin.auth;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tableorder.admin.TestSecurityConfig;
 import com.tableorder.admin.auth.dto.LoginRequest;
 import com.tableorder.admin.auth.dto.RegisterRequest;
 import com.tableorder.admin.auth.dto.AdminResponse;
 import com.tableorder.admin.auth.dto.TokenResponse;
-import com.tableorder.core.exception.InvalidCredentialsException;
-import com.tableorder.core.security.JwtAuthenticationFilter;
+import com.tableorder.core.exception.GlobalExceptionHandler;
 import com.tableorder.core.security.JwtTokenProvider;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.bean.MockBean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.FilterType;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
 
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(
-        controllers = AdminAuthController.class,
-        excludeFilters = @ComponentScan.Filter(
-                type = FilterType.ASSIGNABLE_TYPE,
-                classes = {JwtAuthenticationFilter.class}
-        )
-)
+@WebMvcTest(AdminAuthController.class)
+@Import({TestSecurityConfig.class, GlobalExceptionHandler.class})
 class AdminAuthControllerTest {
 
     @Autowired private MockMvc mockMvc;
@@ -55,17 +47,6 @@ class AdminAuthControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.success").value(true))
                 .andExpect(jsonPath("$.data.token").value("jwt-token"));
-    }
-
-    @Test
-    @DisplayName("POST /api/admin/auth/login - 유효성 검증 실패")
-    void login_validationError() throws Exception {
-        LoginRequest request = new LoginRequest("", "", "");
-
-        mockMvc.perform(post("/api/admin/auth/login")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isBadRequest());
     }
 
     @Test

@@ -15,7 +15,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,8 +25,6 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
@@ -39,14 +36,15 @@ class AdminAuthServiceTest {
     @Mock private PasswordEncoder passwordEncoder;
     @Mock private JwtTokenProvider jwtTokenProvider;
 
-    @InjectMocks private AdminAuthService adminAuthService;
+    private AdminAuthService adminAuthService;
 
     private Store store;
     private Admin admin;
 
     @BeforeEach
     void setUp() {
-        ReflectionTestUtils.setField(adminAuthService, "adminExpiration", 57600000L);
+        adminAuthService = new AdminAuthService(
+                storeRepository, adminRepository, passwordEncoder, jwtTokenProvider, 57600000L);
 
         store = Store.builder().name("테스트매장").code("test-store").build();
         ReflectionTestUtils.setField(store, "id", 1L);
@@ -110,6 +108,11 @@ class AdminAuthServiceTest {
         given(storeRepository.findByCode("test-store")).willReturn(Optional.of(store));
         given(adminRepository.existsByStoreIdAndUsername(1L, "newadmin")).willReturn(false);
         given(passwordEncoder.encode("password1")).willReturn("encoded");
+        given(adminRepository.save(any(Admin.class))).willAnswer(invocation -> {
+            Admin saved = invocation.getArgument(0);
+            ReflectionTestUtils.setField(saved, "id", 2L);
+            return saved;
+        });
 
         AdminResponse result = adminAuthService.register("test-store", "newadmin", "password1");
 
