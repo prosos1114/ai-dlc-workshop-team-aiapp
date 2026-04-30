@@ -1,0 +1,48 @@
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/tableorder}
+    username: ${DB_USERNAME:tableorder}
+    password: ${DB_PASSWORD:tableorder}
+    hikari:
+      minimum-idle: 10
+      maximum-pool-size: 50
+      connection-timeout: 30000
+      idle-timeout: 600000
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 10MB
+
+server:
+  tomcat:
+    max-http-form-post-size: 10485760
+
+jwt:
+  secret: ${JWT_SECRET:my-super-secret-key-for-jwt-token-generation-min-32-chars}
+  admin-expiration: 57600000
+  table-expiration: 31536000000
+
+aws:
+  s3:
+    bucket: ${S3_BUCKET:table-order-images}
+    region: ${AWS_REGION:ap-northeast-2}
+
+cors:
+  allowed-origins: ${CORS_ORIGINS:http://localhost:5173,http://localhost:5174}
+
+logging:
+  level:
+    com.tableorder: DEBUG
+    org.springframework.security: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%X{correlationId:-}] [%-5level] [%logger{36}] - %msg%n"
