@@ -3,6 +3,7 @@ plugins {
 }
 
 dependencies {
+    implementation project(':module-domain')
     implementation project(':module-customer-api')
     implementation project(':module-admin-api')
 
