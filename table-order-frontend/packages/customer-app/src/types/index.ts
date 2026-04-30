@@ -20,7 +20,8 @@ export type {
 
 export interface QRCodeData {
   storeCode: string;
-  totalTables: number;
+  tableNumber: number;
+  totalTables?: number;
 }
 
 export interface AuthInfo {

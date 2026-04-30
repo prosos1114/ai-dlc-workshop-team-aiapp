@@ -11,17 +11,17 @@ export function useTableAuth() {
   const navigate = useNavigate();
 
   const login = useCallback(
-    async (storeCode: string, password: string) => {
+    async (storeCode: string, tableNumber: number, password: string) => {
       setLoading(true);
       clearError();
       try {
-        const response = await tableLogin(storeCode, password);
+        const response = await tableLogin(storeCode, tableNumber, password);
         localStorage.setItem(TOKEN_KEY, response.token);
         const info: AuthInfo = {
           token: response.token,
           storeId: response.storeId,
           tableId: response.tableId,
-          tableNumber: (response as AuthInfo & { tableNumber: number }).tableNumber ?? 0,
+          tableNumber: tableNumber,
           storeCode,
         };
         setAuth(info);

@@ -74,7 +74,7 @@ public class AdminAuthService {
 
         String token = jwtTokenProvider.createAdminToken(admin.getId(), store.getId());
         log.info("Admin login successful: store={}, username={}", storeCode, username);
-        return new TokenResponse(token, adminExpiration);
+        return new TokenResponse(token, adminExpiration, store.getId());
     }
 
     @Transactional

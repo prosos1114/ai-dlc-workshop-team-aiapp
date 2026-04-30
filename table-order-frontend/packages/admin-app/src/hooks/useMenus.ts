@@ -15,7 +15,7 @@ export function useMenus(storeId: number | null) {
     try {
       const params = categoryId ? { categoryId } : {};
       const { data } = await apiClient.get<ApiResponse<Menu[]>>(
-        API.MENUS(storeId), { params }
+        `/api/admin/stores/${storeId}/menus`, { params }
       );
       setMenus(data.data);
     } catch (err: unknown) {
@@ -30,7 +30,7 @@ export function useMenus(storeId: number | null) {
   const fetchCategories = useCallback(async () => {
     if (!storeId) return;
     try {
-      const { data } = await apiClient.get<ApiResponse<Category[]>>(API.CATEGORIES(storeId));
+      const { data } = await apiClient.get<ApiResponse<Category[]>>(`/api/admin/stores/${storeId}/categories`);
       setCategories(data.data);
     } catch (err: unknown) {
       const message = (err as { response?: { data?: { message?: string } } })
@@ -42,7 +42,7 @@ export function useMenus(storeId: number | null) {
   const createMenu = useCallback(async (menuData: Partial<Menu>) => {
     if (!storeId) return;
     try {
-      const { data } = await apiClient.post<ApiResponse<Menu>>(API.MENUS(storeId), menuData);
+      const { data } = await apiClient.post<ApiResponse<Menu>>(`/api/admin/stores/${storeId}/menus`, menuData);
       setMenus(prev => [...prev, data.data]);
       return data.data;
     } catch (err: unknown) {
@@ -56,7 +56,7 @@ export function useMenus(storeId: number | null) {
   const updateMenu = useCallback(async (menuId: number, menuData: Partial<Menu>) => {
     if (!storeId) return;
     try {
-      const { data } = await apiClient.put<ApiResponse<Menu>>(API.MENU(storeId, menuId), menuData);
+      const { data } = await apiClient.put<ApiResponse<Menu>>(`/api/admin/stores/${storeId}/menus/${menuId}`, menuData);
       setMenus(prev => prev.map(m => m.id === menuId ? data.data : m));
       return data.data;
     } catch (err: unknown) {
@@ -70,7 +70,7 @@ export function useMenus(storeId: number | null) {
   const deleteMenu = useCallback(async (menuId: number) => {
     if (!storeId) return;
     try {
-      await apiClient.delete(API.MENU(storeId, menuId));
+      await apiClient.delete(`/api/admin/stores/${storeId}/menus/${menuId}`);
       setMenus(prev => prev.filter(m => m.id !== menuId));
     } catch (err: unknown) {
       const message = (err as { response?: { data?: { message?: string } } })
@@ -83,7 +83,7 @@ export function useMenus(storeId: number | null) {
   const updateMenuOrder = useCallback(async (orderData: { menuId: number; displayOrder: number }[]) => {
     if (!storeId) return;
     try {
-      await apiClient.put(API.MENU_ORDER(storeId), orderData);
+      await apiClient.put(`/api/admin/stores/${storeId}/menus/order`, orderData);
       await fetchMenus();
     } catch (err: unknown) {
       const message = (err as { response?: { data?: { message?: string } } })
@@ -99,7 +99,7 @@ export function useMenus(storeId: number | null) {
       const formData = new FormData();
       formData.append('file', file);
       const { data } = await apiClient.post<ApiResponse<{ url: string }>>(
-        API.MENU_IMAGE(storeId, menuId), formData,
+        `/api/admin/stores/${storeId}/menus/${menuId}/image`, formData,
         { headers: { 'Content-Type': 'multipart/form-data' } }
       );
       setMenus(prev => prev.map(m => m.id === menuId ? { ...m, imageUrl: data.data.url } : m));
@@ -116,7 +116,7 @@ export function useMenus(storeId: number | null) {
     if (!storeId) return;
     try {
       const { data } = await apiClient.post<ApiResponse<Category>>(
-        API.CATEGORIES(storeId), { name }
+        `/api/admin/stores/${storeId}/categories`, { name }
       );
       setCategories(prev => [...prev, data.data]);
       return data.data;

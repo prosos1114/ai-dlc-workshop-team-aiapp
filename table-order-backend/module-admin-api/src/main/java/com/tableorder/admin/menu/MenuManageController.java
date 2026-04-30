@@ -22,7 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/stores/{storeId}")
+@RequestMapping("/api/admin/stores/{storeId}")
 public class MenuManageController {
 
     private final MenuManageService menuManageService;

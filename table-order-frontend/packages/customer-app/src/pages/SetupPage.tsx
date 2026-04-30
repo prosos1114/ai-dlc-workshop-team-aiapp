@@ -27,12 +27,7 @@ export default function SetupPage() {
   const handlePasswordSubmit = async (password: string) => {
     if (!qrData) return;
     clearError();
-    // Login will navigate to /menu on success via useTableAuth
-    // For table assignment, the server returns tableNumber in response
-    await login(qrData.storeCode, password);
-    // If login succeeds, useTableAuth navigates to /menu
-    // We show assigned confirmation if we have a table number
-    // For now, the auth flow handles navigation
+    await login(qrData.storeCode, qrData.tableNumber, password);
   };
 
   const handleAssignedConfirm = () => {

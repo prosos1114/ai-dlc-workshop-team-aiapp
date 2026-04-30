@@ -1,0 +1,38 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:tableorder;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.H2Dialect
+  flyway:
+    enabled: false
+
+jwt:
+  secret: dev-super-secret-key-for-jwt-token-generation-min-32-chars-long
+  admin-expiration: 57600000
+  table-expiration: 31536000000
+
+aws:
+  s3:
+    bucket: table-order-images-dev
+    region: ap-northeast-2
+
+cors:
+  allowed-origins: http://localhost:5173,http://localhost:5174
+
+logging:
+  level:
+    com.tableorder: DEBUG
+    org.springframework.security: DEBUG
