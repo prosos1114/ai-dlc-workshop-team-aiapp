@@ -388,3 +388,16 @@
 **Context**: CONSTRUCTION - Code Generation (Unit 4) 승인. Build and Test 단계 시작.
 
 ---
+
+## Build and Test Stage - Unit 4 (Customer Frontend)
+**Timestamp**: 2026-04-30T10:40:00Z
+**Build Status**: 지침 생성 완료 (실행 대기)
+**Test Status**: 단위 테스트 32개 코드 생성 완료, 통합 테스트 4 시나리오 정의 완료
+**Files Generated**:
+- build-instructions.md
+- unit-test-instructions.md
+- integration-test-instructions.md
+- performance-test-instructions.md
+- build-and-test-summary.md
+
+---
