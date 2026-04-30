@@ -260,3 +260,51 @@
 **Context**: CONSTRUCTION - Code Generation for Unit 1 complete. Presenting for approval.
 
 ---
+
+## CONSTRUCTION - Unit 4 (Customer Frontend) Start
+**Timestamp**: 2026-04-30T09:00:00Z
+**User Input**: "좋아. 이제 내가 Unit4에 대해 개발을 진행할거야."
+**AI Response**: Unit 4 (Customer Frontend) Construction Phase 시작. Functional Design 단계부터 진행.
+**Context**: CONSTRUCTION Phase - Unit 4: Customer Frontend. 이전 산출물 로드 완료 (requirements, user stories, application design, unit-of-work, Unit 1 common-shared 산출물).
+
+---
+
+## CONSTRUCTION - Unit 4 Functional Design - 질문 답변 수집
+**Timestamp**: 2026-04-30T09:10:00Z
+**User Input**: "저장했어"
+**AI Response**: 질문 파일 답변 확인 완료. Q1:C(사이드바), Q2:B(슬라이드패널+3초자동닫기), Q3:C(확장카드), Q4:B(가로모드), Q5:B(3열그리드), Q6:C(SSE), Q7:C(QR코드). 모순/모호 없음. Functional Design 산출물 생성 진행.
+**Context**: CONSTRUCTION - Functional Design (Unit 4: Customer Frontend). 답변 분석 및 산출물 생성 시작.
+
+---
+
+## CONSTRUCTION - Unit 4 Functional Design - 변경 요청
+**Timestamp**: 2026-04-30T09:20:00Z
+**User Input**: "흠.. 큐알코드는 한개로 만들고 큐알코드 스캔 후 테이블번호를 관리자가 입력하는 방식으로 가자"
+**AI Response**: QR 코드 방식 변경 완료. 매장당 QR 1개(storeCode만 포함) → QR 스캔 후 관리자가 테이블 번호 + 비밀번호 입력. business-logic-model.md, business-rules.md, domain-entities.md, frontend-components.md 4개 파일 업데이트.
+**Context**: CONSTRUCTION - Functional Design (Unit 4). PasswordInput 컴포넌트를 TableSetupForm으로 변경. QRCodeData에서 tableNumber 제거.
+
+---
+
+## CONSTRUCTION - Unit 4 Functional Design - 변경 요청 2
+**Timestamp**: 2026-04-30T09:25:00Z
+**User Input**: "큐알코드하나에 매장정보에 총테이블 수를 갖고 있어서 큐알코드 스캔하는 순서대로 테이블 번호를 배정되는 방식으로 수정해줘"
+**AI Response**: QR 코드 방식 재변경 완료. QR에 storeCode + totalTables 포함, 스캔 순서대로 서버가 테이블 번호 자동 배정. TableSetupForm → PasswordInput + TableAssignedConfirm으로 변경. TableLoginRequest에서 tableNumber 제거, TableLoginResponse에 tableNumber 추가. 4개 파일 업데이트.
+**Context**: CONSTRUCTION - Functional Design (Unit 4). 초기 설정 흐름: QR스캔(storeCode+totalTables) → 비밀번호 입력 → 서버가 테이블 번호 배정 → 배정 확인 화면 → 메뉴 화면.
+
+---
+
+## CONSTRUCTION - Unit 4 Functional Design - 승인
+**Timestamp**: 2026-04-30T09:30:00Z
+**User Input**: "다음 단계로 진행하자"
+**AI Response**: Functional Design 승인 완료. NFR Requirements 단계로 진행.
+**Context**: CONSTRUCTION - Functional Design (Unit 4) 승인. NFR Requirements 단계 시작.
+
+---
+
+## CONSTRUCTION - Unit 4 NFR Requirements - 질문 답변 수집
+**Timestamp**: 2026-04-30T09:35:00Z
+**User Input**: "작성완료."
+**AI Response**: 질문 답변 확인 완료. Q1:A(FCP 1.5초), Q2:B(장바구니 오프라인+에러재시도), Q3:C(적극 이미지 최적화), Q4:A(단위 테스트 80%+), Q5:A(WCAG A). 모순 없음. NFR Requirements 산출물 생성 진행.
+**Context**: CONSTRUCTION - NFR Requirements (Unit 4: Customer Frontend).
+
+---
