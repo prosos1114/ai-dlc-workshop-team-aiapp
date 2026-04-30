@@ -1,0 +1,14 @@
+{
+  "name": "table-order-frontend",
+  "private": true,
+  "scripts": {
+    "dev:customer": "pnpm --filter @table-order/customer-app dev",
+    "dev:admin": "pnpm --filter @table-order/admin-app dev",
+    "build:shared": "pnpm --filter @table-order/shared build",
+    "build:customer": "pnpm --filter @table-order/customer-app build",
+    "build:admin": "pnpm --filter @table-order/admin-app build",
+    "build": "pnpm build:shared && pnpm build:customer && pnpm build:admin",
+    "test": "pnpm -r test",
+    "lint": "pnpm -r lint"
+  }
+}
