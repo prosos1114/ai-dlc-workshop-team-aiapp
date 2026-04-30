@@ -12,4 +12,18 @@ export default defineConfig({
       },
     },
   },
+  build: {
+    target: 'es2020',
+    sourcemap: false,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router-dom'],
+          state: ['zustand', 'axios'],
+          form: ['react-hook-form', 'zod', '@hookform/resolvers'],
+        },
+      },
+    },
+    chunkSizeWarningLimit: 200,
+  },
 });

@@ -348,3 +348,43 @@
 **Context**: CONSTRUCTION - NFR Requirements (Unit 4: Customer Frontend).
 
 ---
+
+## CONSTRUCTION - Unit 4 NFR Requirements - 승인
+**Timestamp**: 2026-04-30T09:45:00Z
+**User Input**: "좋아 이제 아까 작업했던거 이어서 작업해 보자"
+**AI Response**: NFR Requirements 승인 완료. NFR Design 단계로 진행.
+**Context**: CONSTRUCTION - NFR Requirements (Unit 4) 승인. NFR Design 단계 시작.
+
+---
+
+## CONSTRUCTION - Unit 4 NFR Design - 질문 답변 수집
+**Timestamp**: 2026-04-30T09:50:00Z
+**User Input**: "저장완료"
+**AI Response**: 답변 확인. Q1:B(자동재시도1~2회+수동), Q2:A(장바구니+인증만persist), Q3:A(글로벌인터셉터). 모순 없음. NFR Design 산출물 생성 진행.
+**Context**: CONSTRUCTION - NFR Design (Unit 4: Customer Frontend).
+
+---
+
+## CONSTRUCTION - Unit 4 NFR Design - 승인
+**Timestamp**: 2026-04-30T10:00:00Z
+**User Input**: "좋다 다음으로 진행하자"
+**AI Response**: NFR Design 승인 완료. Code Generation 단계로 진행.
+**Context**: CONSTRUCTION - NFR Design (Unit 4) 승인. Code Generation Part 1 (Planning) 시작.
+
+---
+
+## CONSTRUCTION - Unit 4 Code Generation - 완료
+**Timestamp**: 2026-04-30T10:30:00Z
+**User Input**: "진행하자"
+**AI Response**: Code Generation Plan 승인 후 Part 2 실행 완료. Step 1~14 중 핵심 코드 생성 완료 (Step 1~13 전체, Step 14 부분). 총 40+ 파일 생성/수정.
+**Context**: CONSTRUCTION - Code Generation (Unit 4: Customer Frontend). 생성 파일: 설정 4개, 타입/스키마 2개, 스토어 5개, API 3개, 훅 6개, 공통 컴포넌트 6개, 레이아웃 5개, 인증 5개, 메뉴 4개, 장바구니 2개, 주문 2개, 주문내역 3개, App 통합 2개, 테스트 4개.
+
+---
+
+## CONSTRUCTION - Unit 4 Code Generation - 승인
+**Timestamp**: 2026-04-30T10:35:00Z
+**User Input**: "다음 스테이지로 가자"
+**AI Response**: Code Generation 승인 완료. Build and Test 단계로 진행.
+**Context**: CONSTRUCTION - Code Generation (Unit 4) 승인. Build and Test 단계 시작.
+
+---
