@@ -3,7 +3,7 @@
 ## Project Information
 - **Project Type**: Greenfield
 - **Start Date**: 2026-04-30T00:00:00Z
-- **Current Stage**: CONSTRUCTION - NFR Requirements (Unit 4: Customer Frontend)
+- **Current Stage**: CONSTRUCTION - NFR Requirements (Unit 4: Customer Frontend) / Code Generation (Unit 3: Admin Backend)
 
 ## Workspace State
 - **Existing Code**: No
