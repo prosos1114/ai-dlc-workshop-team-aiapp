@@ -3,7 +3,7 @@
 ## Project Information
 - **Project Type**: Greenfield
 - **Start Date**: 2026-04-30T00:00:00Z
-- **Current Stage**: CONSTRUCTION - Code Generation (Unit 1: Common/Shared)
+- **Current Stage**: CONSTRUCTION - NFR Design (Unit 3: Admin Backend)
 
 ## Workspace State
 - **Existing Code**: No
