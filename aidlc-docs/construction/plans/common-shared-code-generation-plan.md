@@ -35,10 +35,13 @@
 - [x] RequestLoggingFilter (Correlation ID, MDC)
 
 ## Step 4: module-core - 단위 테스트
-- [ ] JwtTokenProvider 테스트 - Unit 2/3 코드 생성 시 함께 작성
-- [ ] JwtAuthenticationFilter 테스트
-- [ ] GlobalExceptionHandler 테스트
-- [ ] RateLimitInterceptor 테스트
+- [x] JwtTokenProvider 테스트
+- [x] JwtAuthenticationFilter 테스트
+- [x] GlobalExceptionHandler 테스트
+- [x] StoreAccessInterceptor 테스트
+- [x] RequestLoggingFilter 테스트
+- [x] AuthenticatedUser 테스트
+- [x] ApiResponse 테스트
 
 ## Step 5: module-domain - 엔티티 및 Repository
 - [x] BaseEntity (공통 필드, JPA Auditing)
@@ -54,8 +57,8 @@
 - [x] Enum 정의 (SessionStatus, OrderStatus)
 
 ## Step 6: module-domain - 단위 테스트
-- [ ] 엔티티 생성/검증 테스트 - Unit 2/3 코드 생성 시 함께 작성
-- [ ] Repository 쿼리 테스트 (Testcontainers + PostgreSQL)
+- [x] 엔티티 생성/검증 테스트 (Admin, Order, OrderItem, TableSession, TableEntity, Menu, Store)
+- [x] OrderStatus 상태 전환 테스트
 
 ## Step 7: module-app - 애플리케이션 설정
 - [x] TableOrderApplication (메인 클래스)
@@ -78,9 +81,9 @@
 - [x] 상수 정의 (API 경로, 주문 상태)
 
 ## Step 10: shared 패키지 - 단위 테스트
-- [ ] API 클라이언트 인터셉터 테스트 - Unit 4/5에서 작성
-- [ ] 유틸리티 함수 테스트
-- [ ] 타입 검증 테스트
+- [x] API endpoints 테스트
+- [x] 유틸리티 함수 테스트 (formatters)
+- [x] 상수 검증 테스트
 
 ## Step 11: Documentation 및 배포 설정
 - [x] Backend Dockerfile

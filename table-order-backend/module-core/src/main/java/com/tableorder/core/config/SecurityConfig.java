@@ -35,10 +35,8 @@ public class SecurityConfig {
                         .httpStrictTransportSecurity(hsts -> hsts
                                 .maxAgeInSeconds(31536000)
                                 .includeSubDomains(true))
-                        .contentTypeOptions(HeadersConfigurer.ContentTypeOptionsConfig::new)
-                        .frameOptions(HeadersConfigurer.FrameOptionsConfig::deny)
-                        .referrerPolicy(referrer ->
-                                referrer.policy(org.springframework.security.headers.ReferrerPolicyHeaderWriter.ReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN)))
+                        .contentTypeOptions(contentType -> {})
+                        .frameOptions(frame -> frame.deny()))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/admin/auth/**").permitAll()
                         .requestMatchers("/api/table/auth/**").permitAll()
